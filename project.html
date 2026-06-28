@@ -550,6 +550,7 @@
             background-color: rgba(0, 0, 0, 0.7);
             align-items: center;
             justify-content: center;
+            padding: 20px;
         }
         
         .modal-content {
@@ -558,6 +559,9 @@
             border-radius: 8px;
             width: 90%;
             max-width: 500px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
         }
         
         .close-modal {
@@ -676,6 +680,10 @@
             
             .btn-outline {
                 margin-left: 0;
+            }
+            
+            body.modal-open {
+                overflow: hidden;
             }
         }
     </style>
@@ -1364,15 +1372,18 @@
 
         reserveBtn.addEventListener('click', () => {
             reservationModal.style.display = 'flex';
+            document.body.classList.add('modal-open');
         });
 
         closeModal.addEventListener('click', () => {
             reservationModal.style.display = 'none';
+            document.body.classList.remove('modal-open');
         });
 
         window.addEventListener('click', (e) => {
             if (e.target === reservationModal) {
                 reservationModal.style.display = 'none';
+                document.body.classList.remove('modal-open');
             }
         });
 
@@ -1430,6 +1441,7 @@
             alert('Thank you for your reservation! We will confirm shortly.');
             e.target.reset();
             reservationModal.style.display = 'none';
+            document.body.classList.remove('modal-open');
         });
     </script>
 </body>
