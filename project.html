@@ -1282,7 +1282,7 @@
                     <input type="email" class="form-control" placeholder="Your Email" required>
                 </div>
                 <div class="form-group">
-                    <input type="tel" class="form-control" placeholder="Your Phone" required>
+                    <input type="tel" id="reserve-phone" class="form-control" placeholder="Your Phone" pattern="[0-9]{10}" required>
                 </div>
                 <div class="form-group">
                     <input type="date" class="form-control" required>
@@ -1426,6 +1426,20 @@
 
         document.getElementById('reservation-form').addEventListener('submit', (e) => {
             e.preventDefault();
+    
+            // Get the phone number input value
+            const phoneInput = document.getElementById('reserve-phone').value;
+    
+            // Check if the value contains exactly 10 digits
+            // The regex ensures it only consists of digits and is exactly 10 characters long
+            const phonePattern = /^\d{10}$/;
+    
+            if (!phonePattern.test(phoneInput)) {
+                alert('Invalid phone number! Please enter exactly 10 digits.');
+                return; // Stops the form from submitting
+            }
+    
+            // If valid, proceed with submission
             alert('Thank you for your reservation! We will confirm shortly.');
             e.target.reset();
             reservationModal.style.display = 'none';
