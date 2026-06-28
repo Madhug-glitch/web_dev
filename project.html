@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spice Garden - Authentic Indian Cuisine</title>
+    <style>
+        :root {
+            --primary-color: #d9480f;
+            --secondary-color: #4d3319;
+            --accent-color: #ffd700;
+            --light-color: #fff8e6;
+            --dark-color: #2c2c2c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: white;
+            transition: all 0.3s;
+        }
+        
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./restaurant-interior2.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #b83b0b;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            margin-left: 1rem;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 3px;
+            background-color: var(--primary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .about-img {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-img img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-text h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .specialties {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .specialty-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .specialty-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .specialty-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .specialty-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+        
+        .specialty-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .menu {
+            background-color: var(--light-color);
+        }
+        
+        .menu-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .menu-tab {
+            padding: 0.5rem 1.5rem;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            margin: 0 0.5rem 1rem;
+        }
+        
+        .menu-tab.active, .menu-tab:hover {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+        }
+        
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .menu-item {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .menu-item-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .menu-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .menu-item:hover .menu-item-img img {
+            transform: scale(1.1);
+        }
+        
+        .menu-item-content {
+            padding: 1.5rem;
+        }
+        
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .menu-item-title {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+        }
+        
+        .menu-item-price {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        
+        .menu-item-desc {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .spice-level {
+            display: flex;
+            align-items: center;
+        }
+        
+        .spice-level span {
+            margin-right: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .spice-icon {
+            color: var(--primary-color);
+            margin-right: 2px;
+        }
+        
+        .testimonials {
+            background-color: #f5f5f5;
+        }
+        
+        .testimonial-slider {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonial-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .testimonial {
+            min-width: 100%;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .slider-btn {
+            background-color: transparent;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            margin: 0 1rem;
+            transition: transform 0.3s;
+        }
+        
+        .slider-btn:hover {
+            transform: scale(1.2);
+        }
+        
+        .contact {
+            background-color: var(--light-color);
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-detail {
+            display: flex;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+        
+        .contact-icon {
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+        
+        .contact-text h4 {
+            color: var(--secondary-color);
+            margin-bottom: 0.3rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        textarea.form-control {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .map {
+            margin-top: 3rem;
+            height: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .map img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-column h3 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        .reservation-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--secondary-color);
+        }
+        
+        .modal-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-header h2 {
+            color: var(--secondary-color);
+        }
+        
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 99;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Fade in animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s, transform 1s;
+        }
+        
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .navbar {
+                position: relative;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+            
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark-color);
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                gap: 1rem;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s;
+            }
+            
+            .nav-links.active {
+                max-height: 300px;
+            }
+            
+            .nav-links li {
+                margin-left: 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">Spice Garden</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#specialties">Specialties</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#testimonials">Reviews</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Experience Authentic Indian Cuisine</h1>
+            <p>Indulge in the rich flavors and aromatic spices of traditional Indian dishes prepared by our master chefs.</p>
+            <div class="hero-buttons">
+                <button class="btn" id="reserve-btn">Reserve a Table</button>
+                <a href="#menu" class="btn btn-outline">View Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section fade-in" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Story</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-img">
+                    <img src="restaurant-interior.jpg" alt="Restaurant Interior">
+                </div>
+                <div class="about-text">
+                    <h3>A Culinary Journey Through India</h3>
+                    <p>Founded in 2010, Spice Garden brings the authentic flavors of India to your table. Our journey began with a simple desire to share the rich culinary traditions of India with our local community.</p>
+                    <p>Our head chef, with over 20 years of experience, carefully curates each dish to ensure an authentic experience. We source the finest spices directly from different regions of India to create the perfect blend of flavors that will transport you straight to the streets of Mumbai, the royal kitchens of Rajasthan, or the coastal shores of Kerala.</p>
+                    <p>At Spice Garden, we believe that food is not just about taste; it's about culture, tradition, and bringing people together. We invite you to join us on this flavorful journey.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specialties Section -->
+    <section class="section specialties fade-in" id="specialties">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Specialties</h2>
+            </div>
+            <div class="specialty-cards">
+                <div class="specialty-card">
+                    <img src="north indian cuisine.jpg" alt="North Indian Cuisine">
+                    <h3>North Indian Delicacies</h3>
+                    <p>Rich, creamy curries, tandoori specialties, and bread varieties that capture the essence of North Indian royal kitchens.</p>
+                </div>
+                <div class="specialty-card">
+                    <img src="south indian cuisine.jpg" alt="South Indian Cuisine">
+                    <h3>South Indian Flavors</h3>
+                    <p>Light, aromatic dishes with coconut and curry leaves, featuring dosas, idlis, and tangy sambar preparations.</p>
+                </div>
+                <div class="specialty-card">
+                    <img src="street food.jpg" alt="Street Food">
+                    <h3>Street Food Classics</h3>
+                    <p>Authentic chaats, snacks, and finger foods that bring the vibrant street food culture of India to your plate.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="section menu fade-in" id="menu">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Menu</h2>
+            </div>
+            <div class="menu-tabs">
+                <button class="menu-tab active" data-category="starters">Starters</button>
+                <button class="menu-tab" data-category="main-course">Main Course</button>
+                <button class="menu-tab" data-category="rice">Rice & Biryani</button>
+                <button class="menu-tab" data-category="dal">Dal & Lentils</button>
+                <button class="menu-tab" data-category="breads">Breads</button>
+                <button class="menu-tab" data-category="condiments">Chutneys & Sauce</button>
+                <button class="menu-tab" data-category="desserts">Desserts</button>
+                <button class="menu-tab" data-category="beverages">Beverages</button>
+            </div>
+            <div class="menu-items">
+                <!-- Starters -->
+                <div class="menu-item" data-category="starters">
+                    <div class="menu-item-img">
+                        <img src="samosa.jpg" alt="Samosa">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Samosa</h3>
+                            <div class="menu-item-price">₹10/pcs.</div>
+                        </div>
+                        <p class="menu-item-desc">Crispy pastry filled with spiced potatoes, peas, and aromatic herbs, served with mint and tamarind chutneys.</p>
+                        <div class="spice-level">
+                            <span>Spice Level:</span>
+                            <span class="spice-icon">🌶️</span>
+                            <span class="spice-icon">🌶️</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item" data-category="starters">
+                    <div class="menu-item-img">
+                        <img src="paneer-tikka.jpg" alt="Paneer Tikka">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Paneer Tikka</h3>
+                            <div class="menu-item-price">₹189</div>
+                        </div>
+                        <p class="menu-item-desc">Marinated cottage cheese cubes grilled to perfection in our traditional tandoor oven with bell peppers and onions.</p>
+                        <div class="spice-level">
+                            <span>Spice Level:</span>
+                            <span class="spice-icon">🌶️</span>
+                            <span class="spice-icon">🌶️</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item" data-category="starters">
+                    <div class="menu-item-img">
+                        <img src="vegetable-pakora.jpg" alt="Vegetable Pakora">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Vegetable Pakora</h3>
+                            <div class="menu-item-price">₹79</div>
+                        </div>
+                        <p class="menu-item-desc">Mixed vegetables dipped in a spiced chickpea batter and deep-fried to a golden crisp, served with tomato chutney.</p>
+                        <div class="spice-level">
+                            <span>Spice Level:</span>
+                            <span class="spice-icon">🌶️</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main Course -->
+                <div class="menu-item" data-category="main-course" style="display: none;">
+                    <div class="menu-item-img">
+                        <img src="butter-chicken.jpg" alt="Butter Chicken">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Butter Chicken</h3>
+                            <div class="menu-item-price">₹159</div>
+                        </div>
+                        <p class="menu-item-desc">Tender chicken tikka cooked in a rich, creamy tomato sauce with butter and aromatic spices. A North Indian classic.</p>
+                        <div class="spice-level">
+                            <span>Spice Level:</span>
+                            <span class="spice-icon">🌶️</span>
+                            <span class="spice-icon">🌶️</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item" data-category="main-course" style="display: none;">
+                    <div class="menu-item-img">
+                        <img src="chicken curry.jpg" alt="Chicken Curry">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Traditional Chicken Curry</h3>
+                            <div class="menu-item-price">₹149</div>
+                        </div>
+                        <p class="menu-item-desc">Succulent chicken pieces simmered in an aromatic curry sauce with freshly ground spices, ginger, and garlic.</p>
+                        <div class="spice-level">
+                            <span>Spice Level:</span>
+                            <span class="spice-icon">🌶️</span>
+                            <span class="spice-icon">🌶️</span>
+                            <span class="spice-icon">🌶️</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item" data-category="main-course" style="display: none;">
+                    <div class="menu-item-img">
+                        <img src="chicken tikka masala.jpeg" alt="Chicken Tikka Masala">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Chicken Tikka Masala</h3>
+                            <div class="menu-item-price">₹169</div>
+                        </div>
+                        <p class="menu-item-desc">Grilled chicken tikka pieces in a creamy tomato sauce flavored with fenugreek and an aromatic blend of spices.</p>
+                        <div class="spice-level">
+                            <span>Spice Level:</span>
+                            <span class="spice-icon">🌶️</span>
+                            <span class="spice-icon">🌶️</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rice & Biryani -->
+                <div class="menu-item" data-category="rice" style="display: none;">
+                    <div class="menu-item-img">
+                        <img src="Chicken-Biryani.jpg" alt="Chicken Biryani">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Chicken Biryani</h3>
+                            <div class="menu-item-price">₹259</div>
+                        </div>
+                        <p class="menu-item-desc">Fragrant basmati rice cooked with tender chicken pieces, aromatic spices, and saffron.</p>
+                        <div class="spice-level">
+                            <span>Spice Level:</span>
+                            <span class="spice-icon">🌶️</span>
+                            <span class="spice-icon">🌶️</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item" data-category="rice" style="display: none;">
+                    <div class="menu-item-img">
+                        <img src="Best-Mutton-Biryani.jpg" alt="Mutton Biryani">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Mutton Biryani</h3>
+                            <div class="menu-item-price">₹289</div>
+                        </div>
+                        <p class="menu-item-desc">Slow-cooked tender mutton pieces layered with fragrant basmati rice, aromatic spices, and saffron.</p>
+                        <div class="spice-level">
+                            <span>Spice Level:</span>
+                            <span class="spice-icon">🌶️</span>
+                            <span class="spice-icon">🌶️</span>
+                            <span class="spice-icon">🌶️</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item" data-category="rice" style="display: none;">
+                    <div class="menu-item-img">
+                        <img src="chicken thali.webp" alt="Chicken Thali">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Chicken Thali</h3>
+                            <div class="menu-item-price">₹199</div>
+                        </div>
+                        <p class="menu-item-desc">A complete meal featuring chicken curry, dal, rice, naan, raita, and assorted chutneys.</p>
+                        <div class="spice-level">
+                            <span>Spice Level:</span>
+                            <span class="spice-icon">🌶️</span>
+                            <span class="spice-icon">🌶️</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dal & Lentils -->
+                <div class="menu-item" data-category="dal" style="display: none;">
+                    <div class="menu-item-img">
+                        <img src="dal-makhani.jpg" alt="Dal Makhani">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Dal Makhani</h3>
+                            <div class="menu-item-price">₹129</div>
+                        </div>
+                        <p class="menu-item-desc">Creamy black lentils simmered overnight with butter and aromatic spices.</p>
+                        <div class="spice-level">
+                            <span>Spice Level:</span>
+                            <span class="spice-icon">🌶️</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item" data-category="dal" style="display: none;">
+                    <div class="menu-item-img">
+                        <img src="moong-dal.jpg" alt="Yellow Dal">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Yellow Dal</h3>
+                            <div class="menu-item-price">₹119</div>
+                        </div>
+                        <p class="menu-item-desc">Traditional yellow lentils cooked with onions, tomatoes, and aromatic spices.</p>
+                        <div class="spice-level">
+                            <span>Spice Level:</span>
+                            <span class="spice-icon">🌶️</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item" data-category="dal" style="display: none;">
+                    <div class="menu-item-img">
+                        <img src="chana-dal.jpg" alt="Chana Dal">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Chana Dal</h3>
+                            <div class="menu-item-price">₹119</div>
+                        </div>
+                        <p class="menu-item-desc">Split Bengal gram lentils cooked with ginger, garlic, and a blend of spices.</p>
+                        <div class="spice-level">
+                            <span>Spice Level:</span>
+                            <span class="spice-icon">🌶️</span>
+                            <span class="spice-icon">🌶️</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Breads -->
+                <div class="menu-item" data-category="breads" style="display: none;">
+                    <div class="menu-item-img">
+                        <img src="butter-naan.jpg" alt="Butter Naan">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Butter Naan</h3>
+                            <div class="menu-item-price">₹39</div>
+                        </div>
+                        <p class="menu-item-desc">Freshly baked Indian bread brushed with butter, perfect for dipping in curries.</p>
+                        <div class="spice-level">
+                            <span>Spice Level:</span>
+                            <span>Mild</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item" data-category="breads" style="display: none;">
+                    <div class="menu-item-img">
+                        <img src="garlic naan.jpg" alt="Garlic Naan">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Garlic Naan</h3>
+                            <div class="menu-item-price">₹49</div>
+                        </div>
+                        <p class="menu-item-desc">Butter naan topped with fresh garlic and coriander, baked in tandoor.</p>
+                        <div class="spice-level">
+                            <span>Spice Level:</span>
+                            <span>Mild</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item" data-category="breads" style="display: none;">
+                    <div class="menu-item-img">
+                        <img src="cheese naan.jpg" alt="Cheese Naan">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Cheese Naan</h3>
+                            <div class="menu-item-price">₹49</div>
+                        </div>
+                        <p class="menu-item-desc">Butter naan stuffed with melted cheese, perfect for cheese lovers.</p>
+                        <div class="spice-level">
+                            <span>Spice Level:</span>
+                            <span>Mild</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desserts -->
+                <div class="menu-item" data-category="desserts" style="display: none;">
+                    <div class="menu-item-img">
+                        <img src="gulab jamun.jpg" alt="Gulab Jamun">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Gulab Jamun</h3>
+                            <div class="menu-item-price">₹59</div>
+                        </div>
+                        <p class="menu-item-desc">Sweet milk dumplings soaked in sugar syrup, served warm.</p>
+                        <div class="spice-level">
+                            <span>Spice Level:</span>
+                            <span>Sweet</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item" data-category="desserts" style="display: none;">
+                    <div class="menu-item-img">
+                        <img src="Kheer.avif" alt="Kheer">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Kheer</h3>
+                            <div class="menu-item-price">₹49</div>
+                        </div>
+                        <p class="menu-item-desc">Traditional Indian rice pudding with cardamom, nuts, and saffron.</p>
+                        <div class="spice-level">
+                            <span>Spice Level:</span>
+                            <span>Sweet</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item" data-category="desserts" style="display: none;">
+                    <div class="menu-item-img">
+                        <img src="Rasmalai.jpg" alt="Rasmalai">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Rasmalai</h3>
+                            <div class="menu-item-price">₹69</div>
+                        </div>
+                        <p class="menu-item-desc">Soft cottage cheese dumplings in sweet milk sauce with pistachios.</p>
+                        <div class="spice-level">
+                            <span>Spice Level:</span>
+                            <span>Sweet</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chutneys & Sauce -->
+                <div class="menu-item" data-category="condiments" style="display: none;">
+                    <div class="menu-item-img">
+                        <img src="mint-chutney.jpg" alt="Mint Chutney">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Mint Chutney</h3>
+                            <div class="menu-item-price">₹29</div>
+                        </div>
+                        <p class="menu-item-desc">Fresh mint and coriander chutney with green chilies and lemon juice.</p>
+                        <div class="spice-level">
+                            <span>Spice Level:</span>
+                            <span class="spice-icon">🌶️</span>
+                            <span class="spice-icon">🌶️</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item" data-category="condiments" style="display: none;">
+                    <div class="menu-item-img">
+                        <img src="tamarind-chutney.jpg" alt="Tamarind Chutney">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Tamarind Chutney</h3>
+                            <div class="menu-item-price">₹29</div>
+                        </div>
+                        <p class="menu-item-desc">Sweet and tangy tamarind chutney with dates and spices.</p>
+                        <div class="spice-level">
+                            <span>Spice Level:</span>
+                            <span>Mild</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item" data-category="condiments" style="display: none;">
+                    <div class="menu-item-img">
+                        <img src="Cucumber-raita.jpg" alt="Raita">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Cucumber Raita</h3>
+                            <div class="menu-item-price">₹29</div>
+                        </div>
+                        <p class="menu-item-desc">Cooling yogurt with cucumber, mint, and cumin seeds.</p>
+                        <div class="spice-level">
+                            <span>Spice Level:</span>
+                            <span>Mild</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials fade-in" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Guests Say</h2>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial-container">
+                    <div class="testimonial">
+                        <p class="testimonial-text">"The best Indian restaurant in town! The flavors are authentic, and the service is exceptional. I especially love their butter chicken and garlic naan."</p>
+                        <p class="testimonial-author">- Kailash</p>
+                    </div>
+                    <div class="testimonial">
+                        <p class="testimonial-text">"A hidden gem! The spices are perfectly balanced, and the atmosphere is warm and inviting. Their biryani is simply outstanding."</p>
+                        <p class="testimonial-author">- Moyee</p>
+                    </div>
+                    <div class="testimonial">
+                        <p class="testimonial-text">"I've been coming here for years, and the quality has never wavered. The tandoori dishes are always perfectly cooked."</p>
+                        <p class="testimonial-author">- Tina</p>
+                    </div>
+                </div>
+                <div class="slider-controls">
+                    <button class="slider-btn prev">❮</button>
+                    <button class="slider-btn next">❯</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact fade-in" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-detail">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-text">
+                            <h4>Address</h4>
+                            <p>CB-40 Street 223<br>North 24 Parganas<br>Kolkata, West Bengal</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-text">
+                            <h4>Phone</h4>
+                            <p>+91 7085752828</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <p>info@spicegarden.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-icon">⏰</div>
+                        <div class="contact-text">
+                            <h4>Hours</h4>
+                            <p>Monday - Friday: 11:00 AM - 10:00 PM<br>Saturday - Sunday: 12:00 PM - 11:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" class="form-control" placeholder="Your Phone">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+            <img src="map location.jpg" width="300" alt="Restaurant Location Map">
+            <!--<div class="map">
+            </div>
+        </div> -->
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Us</h3>
+                    <p>Spice Garden brings authentic Indian cuisine to your table, offering a perfect blend of traditional flavors and modern dining experience.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#specialties">Specialties</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#testimonials">Reviews</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📱</a>
+                        <a href="#" class="social-link">📸</a>
+                        <a href="#" class="social-link">📘</a>
+                        <a href="#" class="social-link">🐦</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Spice Garden. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Reservation Modal -->
+    <div class="reservation-modal" id="reservation-modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <div class="modal-header">
+                <h2>Make a Reservation</h2>
+            </div>
+            <form id="reservation-form">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" class="form-control" placeholder="Your Phone" required>
+                </div>
+                <div class="form-group">
+                    <input type="date" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input type="time" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" required>
+                        <option value="">Number of Guests</option>
+                        <option value="1">1 Person</option>
+                        <option value="2">2 People</option>
+                        <option value="3">3 People</option>
+                        <option value="4">4 People</option>
+                        <option value="5">5+ People</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" placeholder="Special Requests"></textarea>
+                </div>
+                <button type="submit" class="btn">Confirm Reservation</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top">↑</a>
+
+    <script>
+        // Mobile Navigation
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Menu Tabs
+        const menuTabs = document.querySelectorAll('.menu-tab');
+        const menuItems = document.querySelectorAll('.menu-item');
+
+        menuTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                menuTabs.forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                tab.classList.add('active');
+
+                const category = tab.dataset.category;
+                menuItems.forEach(item => {
+                    if (item.dataset.category === category) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Testimonial Slider
+        const testimonialContainer = document.querySelector('.testimonial-container');
+        const testimonials = document.querySelectorAll('.testimonial');
+        const prevBtn = document.querySelector('.slider-btn.prev');
+        const nextBtn = document.querySelector('.slider-btn.next');
+        let currentSlide = 0;
+
+        function updateSlider() {
+            testimonialContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        prevBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + testimonials.length) % testimonials.length;
+            updateSlider();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % testimonials.length;
+            updateSlider();
+        });
+
+        // Auto slide
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % testimonials.length;
+            updateSlider();
+        }, 5000);
+
+        // Reservation Modal
+        const reserveBtn = document.getElementById('reserve-btn');
+        const reservationModal = document.getElementById('reservation-modal');
+        const closeModal = document.querySelector('.close-modal');
+
+        reserveBtn.addEventListener('click', () => {
+            reservationModal.style.display = 'flex';
+        });
+
+        closeModal.addEventListener('click', () => {
+            reservationModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === reservationModal) {
+                reservationModal.style.display = 'none';
+            }
+        });
+
+        // Back to Top Button
+        const backToTop = document.querySelector('.back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        // Fade In Animation
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        function checkFade() {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+
+                if (elementTop < window.innerHeight && elementBottom > 0) {
+                    element.classList.add('appear');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkFade);
+        window.addEventListener('load', checkFade);
+
+        // Form Submissions
+        document.getElementById('contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            e.target.reset();
+        });
+
+        document.getElementById('reservation-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your reservation! We will confirm shortly.');
+            e.target.reset();
+            reservationModal.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
